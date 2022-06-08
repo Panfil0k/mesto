@@ -1,0 +1,30 @@
+.header {
+  min-height: 74px;
+  margin: 45px 200px 0 200px;
+  border-bottom: 1px solid #545454;
+}
+
+@media (max-width: 1279px) {
+
+  .header {
+    margin: 45px 100px 0 100px;
+  }
+
+}
+
+@media (max-width: 767px) {
+
+  .header {
+    margin: 45px 50px 0 50px;
+  }
+
+}
+
+@media (max-width: 424px) {
+
+  .header {
+    min-height: 56px;
+    margin: 28px 0 0 0;
+  }
+
+}
