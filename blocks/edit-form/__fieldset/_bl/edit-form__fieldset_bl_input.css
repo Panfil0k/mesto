@@ -1,6 +1,14 @@
 .edit-form__fieldset_bl_input {
-  padding-top: 50px;
+  padding-top: 54px;
   display: flex;
   flex-direction: column;
   row-gap: 30px;
+}
+
+@media (max-width: 549px) {
+
+  .edit-form__fieldset_bl_input {
+    padding-top: 75px;
+  }
+
 }

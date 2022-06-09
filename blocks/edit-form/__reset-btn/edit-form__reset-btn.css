@@ -13,3 +13,14 @@
 .edit-form__reset-btn:hover {
   opacity: .6;
 }
+
+@media (max-width: 549px) {
+
+  .edit-form__reset-btn {
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: -36px;
+  }
+
+}

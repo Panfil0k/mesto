@@ -21,6 +21,7 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/form-overlay/form-overlay.css);
+@import url(../blocks/form-overlay/_close/form-overlay_close.css);
 @import url(../blocks/edit-form/__container/edit-form__container.css);
 @import url(../blocks/edit-form/__title/edit-form__title.css);
 @import url(../blocks/edit-form/__fieldset/edit-form__fieldset.css);

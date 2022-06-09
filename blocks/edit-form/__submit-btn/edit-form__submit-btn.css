@@ -15,3 +15,13 @@
 .edit-form__submit-btn:hover {
   opacity: .8;
 }
+
+@media (max-width: 549px) {
+
+  .edit-form__submit-btn {
+    height: 46px;
+    font-size: 14px;
+    line-height: 1.21;
+  }
+
+}
