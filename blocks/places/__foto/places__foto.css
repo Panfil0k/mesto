@@ -1,6 +1,6 @@
 .places__foto {
   width: 100%;
   grid-area: foto;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1/1;
   object-fit: cover;
 }
