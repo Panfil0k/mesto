@@ -1,7 +1,6 @@
 @import url(../vendor/normalize.css);
 @import url(../fonts/fonts.css);
 @import url(../blocks/page/page.css);
-@import url(../blocks/fixed/fixed.css);
 @import url(../blocks/page/__container/page__container.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -14,7 +13,6 @@
 @import url(../blocks/profile/__add-btn/profile__add-btn.css);
 @import url(../blocks/places/places.css);
 @import url(../blocks/places/__item/places__item.css);
-@import url(../blocks/places/__foto-wrapper/places__foto-wrapper.css);
 @import url(../blocks/places/__foto/places__foto.css);
 @import url(../blocks/places/__name/places__name.css);
 @import url(../blocks/places/__like/places__like.css);
@@ -22,12 +20,11 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/form-overlay/form-overlay.css);
-@import url(../blocks/form-overlay/_close/form-overlay_close.css);
+@import url(../blocks/form-overlay/_open/form-overlay_open.css);
 @import url(../blocks/edit-form/__container/edit-form__container.css);
 @import url(../blocks/edit-form/__title/edit-form__title.css);
 @import url(../blocks/edit-form/__fieldset/edit-form__fieldset.css);
 @import url(../blocks/edit-form/__fieldset/_bl/edit-form__fieldset_bl_input.css);
-@import url(../blocks/edit-form/__fieldset/_bl/edit-form__fieldset_bl_handlers.css);
 @import url(../blocks/edit-form/__item/edit-form__item.css);
 @import url(../blocks/edit-form/__submit-btn/edit-form__submit-btn.css);
 @import url(../blocks/edit-form/__reset-btn/edit-form__reset-btn.css);

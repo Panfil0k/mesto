@@ -1,7 +1,7 @@
 .header {
   min-height: 74px;
   margin: 45px 200px 0 200px;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid #545454; /* в макете который по ссылке именно такой цвет */
 }
 
 @media (max-width: 1279px) {

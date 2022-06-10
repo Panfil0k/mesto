@@ -11,7 +11,7 @@
     <header class="header">
       <img class="header__logo" src="./images/header-logo.svg" alt="Логотип">  
     </header>
-    <main>
+    <main class="main">
       <section class="profile">
         <img class="profile__avatar" src="./images/avatar.png" alt="Фото пользователя">
         <div class="profile__info">
@@ -21,49 +21,34 @@
         </div>
         <button class="profile__add-btn" type="button"></button>
       </section>
-      <section class="edit-form form-overlay form-overlay_close">
-        <div class="edit-form__container">
-          <form class="edit-form__admin">
-            <h3 class="edit-form__title">Редактировать профиль</h3>
-            <fieldset class="edit-form__fieldset edit-form__fieldset_bl_input">
-              <input class="edit-form__item edit-form__item_el_name" type="text" name="name" placeholder="Имя" value="Жак-Ив Кусто" required>
-              <input class="edit-form__item edit-form__item_el_job" type="text" name="job" placeholder="О себе" value="Исследователь океана" required>
-            </fieldset>
-            <fieldset class="edit-form__fieldset edit-form__fieldset_bl_handlers">
-              <button class="edit-form__submit-btn" type="submit">Сохранить</button>
-              <button class="edit-form__reset-btn" type="reset"></button>
-            </fieldset>
-          </form>
-        </div>
-      </section>
       <section class="places">
         <div class="places__item">
-          <div class="places__foto-wrapper"><img class="places__foto" src="./images/place-baikal.jpg" alt="Байкал"></div>
+          <img class="places__foto" src="./images/place-baikal.jpg" alt="Байкал">
           <h2 class="places__name">Байкал</h2>
           <button class="places__like" type="button"></button>
         </div>
         <div class="places__item">
-          <div class="places__foto-wrapper"><img class="places__foto" src="./images/place-kamchatka.jpg" alt="Камчатка"></div>
+          <img class="places__foto" src="./images/place-kamchatka.jpg" alt="Камчатка">
           <h2 class="places__name">Камчатка</h2>
           <button class="places__like" type="button"></button>
         </div>
         <div class="places__item">
-          <div class="places__foto-wrapper"><img class="places__foto" src="./images/place-komi.jpg" alt="Республика Коми"></div>
+          <img class="places__foto" src="./images/place-komi.jpg" alt="Республика Коми">
           <h2 class="places__name">Республика Коми</h2>
           <button class="places__like places__like_active" type="button"></button>
         </div>
         <div class="places__item">
-          <div class="places__foto-wrapper"><img class="places__foto" src="./images/place-tyumen.jpg" alt="Тюмень"></div>
+          <img class="places__foto" src="./images/place-tyumen.jpg" alt="Тюмень">
           <h2 class="places__name">Тюмень</h2>
           <button class="places__like" type="button"></button>
         </div>
         <div class="places__item">
-          <div class="places__foto-wrapper"><img class="places__foto" src="./images/place-taganay.jpg" alt="Таганай"></div>
+          <img class="places__foto" src="./images/place-taganay.jpg" alt="Таганай">
           <h2 class="places__name">Таганай</h2>
           <button class="places__like" type="button"></button>
         </div>
         <div class="places__item">
-          <div class="places__foto-wrapper"><img class="places__foto" src="./images/place-orenburg.jpg" alt="Оренбург"></div>
+          <img class="places__foto" src="./images/place-orenburg.jpg" alt="Оренбург">
           <h2 class="places__name">Оренбург</h2>
           <button class="places__like" type="button"></button>
         </div>
@@ -73,6 +58,21 @@
       <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
   </div>
+  <section class="edit-form form-overlay">
+    <div class="edit-form__container">
+      <form class="edit-form__admin" name="editProfile">
+        <h3 class="edit-form__title">Редактировать профиль</h3>
+        <fieldset class="edit-form__fieldset edit-form__fieldset_bl_input">
+          <input class="edit-form__item edit-form__item_el_name" type="text" name="name" placeholder="Имя" value="Жак-Ив Кусто" required>
+          <input class="edit-form__item edit-form__item_el_job" type="text" name="job" placeholder="О себе" value="Исследователь океана" required>
+        </fieldset>
+        <fieldset class="edit-form__fieldset">
+          <button class="edit-form__submit-btn" type="submit">Сохранить</button>
+          <button class="edit-form__reset-btn" type="reset"></button>
+        </fieldset>
+      </form>
+    </div>
+  </section>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
