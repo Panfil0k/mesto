@@ -4,6 +4,10 @@
   font-weight: 500;
   margin: 0;
   grid-area: name;
+  max-width: 300px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (max-width: 779px) {

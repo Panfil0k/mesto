@@ -8,5 +8,4 @@
   background-color: rgba(0, 0, 0, .5);
   display: flex;
   align-items: center;
-  transition: display .5s;
 }
