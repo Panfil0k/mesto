@@ -30,3 +30,10 @@ function formSubmitHandler (evt) {
 
 editForm.addEventListener('submit', formSubmitHandler);
 
+const editFormOverlay = document.querySelector('.form-overlay');
+
+editFormOverlay.addEventListener('click', (event) => {
+  if(event.target === event.currentTarget) {
+    closeEditForm()
+  }
+})
