@@ -6,6 +6,9 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, .5);
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s, visibility 0s .5s;
   align-items: center;
 }
