@@ -22,45 +22,23 @@
         <button class="profile__add-btn" type="button"></button>
       </section>
       <section class="places">
-        <div class="places__item">
-          <img class="places__foto" src="./images/place-baikal.jpg" alt="Байкал">
-          <h2 class="places__name">Байкал</h2>
-          <button class="places__like" type="button"></button>
-        </div>
-        <div class="places__item">
-          <img class="places__foto" src="./images/place-kamchatka.jpg" alt="Камчатка">
-          <h2 class="places__name">Камчатка</h2>
-          <button class="places__like" type="button"></button>
-        </div>
-        <div class="places__item">
-          <img class="places__foto" src="./images/place-komi.jpg" alt="Республика Коми">
-          <h2 class="places__name">Республика Коми</h2>
-          <button class="places__like places__like_active" type="button"></button>
-        </div>
-        <div class="places__item">
-          <img class="places__foto" src="./images/place-tyumen.jpg" alt="Тюмень">
-          <h2 class="places__name">Тюмень</h2>
-          <button class="places__like" type="button"></button>
-        </div>
-        <div class="places__item">
-          <img class="places__foto" src="./images/place-taganay.jpg" alt="Таганай">
-          <h2 class="places__name">Таганай</h2>
-          <button class="places__like" type="button"></button>
-        </div>
-        <div class="places__item">
-          <img class="places__foto" src="./images/place-orenburg.jpg" alt="Оренбург">
-          <h2 class="places__name">Оренбург</h2>
-          <button class="places__like" type="button"></button>
-        </div>
+        <template id="places-item-template">
+          <div class="places__item">
+            <img class="places__foto">
+            <h2 class="places__name"></h2>
+            <button class="places__like" type="button"></button>
+            <button class="places__delete" type="button"></button>
+          </div>
+        </template>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
   </div>
-  <section class="edit-form form-overlay">
-    <div class="edit-form__container">
-      <form class="edit-form__admin" name="editProfile">
+  <section class="popup popup-edit-profile">
+    <div class="popup__container">
+      <form class="edit-form" name="editProfile">
         <h3 class="edit-form__title">Редактировать профиль</h3>
         <fieldset class="edit-form__fieldset">
           <input class="edit-form__item edit-form__item_el_name" type="text" name="name" placeholder="Имя" value="Жак-Ив Кусто" required>
@@ -68,9 +46,31 @@
         </fieldset>
         <fieldset class="edit-form__fieldset">
           <button class="edit-form__submit-btn" type="submit">Сохранить</button>
-          <button class="edit-form__reset-btn" type="reset"></button>
+          <button class="popup__close-btn" type="reset"></button>
         </fieldset>
       </form>
+    </div>
+  </section>
+  <section class="popup popup-add-card">
+    <div class="popup__container">
+      <form class="edit-form" name="addCard">
+        <h3 class="edit-form__title">Новое место</h3>
+        <fieldset class="edit-form__fieldset">
+          <input class="edit-form__item edit-form__item_el_card-name" type="text" name="card-name" placeholder="Название" value="" required>
+          <input class="edit-form__item edit-form__item_el_card-src" type="text" name="card-src" placeholder="Ссылка на картинку" value="" required>
+        </fieldset>
+        <fieldset class="edit-form__fieldset">
+          <button class="edit-form__submit-btn" type="submit">Создать</button>
+          <button class="popup__close-btn" type="reset"></button>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup-img">
+    <div class="popup-img__container">
+      <img class="popup-img__foto" src="">
+      <button class="popup__close-btn" type="reset"></button>
+      <h2 class="popup-img__title"></h2>
     </div>
   </section>
   <script src="./scripts/index.js"></script>

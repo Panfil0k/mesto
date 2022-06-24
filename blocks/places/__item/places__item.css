@@ -8,4 +8,5 @@
     'foto foto'
     'name like';
   align-items: center;
+  position: relative;
 }
