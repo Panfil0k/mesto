@@ -41,12 +41,12 @@
       <form class="edit-form" name="editProfile">
         <h3 class="edit-form__title">Редактировать профиль</h3>
         <fieldset class="edit-form__fieldset">
-          <input class="edit-form__item edit-form__item_el_name" type="text" name="name" placeholder="Имя" value="Жак-Ив Кусто" required>
-          <input class="edit-form__item edit-form__item_el_job" type="text" name="job" placeholder="О себе" value="Исследователь океана" required>
+          <input class="edit-form__item edit-form__item_el_name" type="text" name="name" placeholder="Имя" value="" required>
+          <input class="edit-form__item edit-form__item_el_job" type="text" name="job" placeholder="О себе" value="" required>
         </fieldset>
         <fieldset class="edit-form__fieldset">
           <button class="edit-form__submit-btn" type="submit">Сохранить</button>
-          <button class="popup__close-btn" type="reset"></button>
+          <button class="popup__close-btn" type="button"></button>
         </fieldset>
       </form>
     </div>
@@ -61,18 +61,19 @@
         </fieldset>
         <fieldset class="edit-form__fieldset">
           <button class="edit-form__submit-btn" type="submit">Создать</button>
-          <button class="popup__close-btn" type="reset"></button>
+          <button class="popup__close-btn" type="button"></button>
         </fieldset>
       </form>
     </div>
   </section>
   <section class="popup popup-img">
     <div class="popup-img__container">
-      <img class="popup-img__foto">
-      <button class="popup__close-btn" type="reset"></button>
+      <img class="popup-img__foto" src="#" alt="#">
+      <button class="popup__close-btn" type="button"></button>
       <h2 class="popup-img__title"></h2>
     </div>
   </section>
+  <script src="./scripts/initial-сards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
