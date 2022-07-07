@@ -28,7 +28,7 @@ const popupTitle = popupImg.querySelector('.popup-img__title');
 /* Открытие\закрытие попапов */
 function openPopup (popup) {
   popup.classList.add('popup_open');
-  document.addEventListener('keydown', handlerEsc);
+  document.addEventListener('keydown', handleEscKeyPress);
 }
 
 function closePopup (popup) {
@@ -37,7 +37,7 @@ function closePopup (popup) {
   if (formInPopup) {
     formInPopup.reset();
   }
-  document.removeEventListener('keydown', handlerEsc);
+  document.removeEventListener('keydown', handleEscKeyPress);
   
   const {inputErrorClass, errorClass} = configValidation;
   const errorListInput = Array.from(popup.querySelectorAll(`.${inputErrorClass}`));
@@ -51,7 +51,7 @@ function closePopup (popup) {
 }
 
 /* Закрытие попапа по клику на оверлей */
-function handlerOverlay(evt) {
+function handlePopupOverlayClick(evt) {
   if(evt.target === evt.currentTarget) {
     const popupOpen = document.querySelector('.popup_open');
     closePopup(popupOpen);
@@ -59,7 +59,7 @@ function handlerOverlay(evt) {
 }
 
 /* Закрытие попапа по кнопке Esc */
-function handlerEsc(evt) {
+function handleEscKeyPress(evt) {
   if (evt.key === 'Escape') {
     const popupOpen = document.querySelector('.popup_open');
     closePopup(popupOpen);
@@ -67,7 +67,7 @@ function handlerEsc(evt) {
 }
 
 /* Передаем в форму редактирования профиля текущие данные и вешаем событие input */
-function editProfileContent () {
+function openEditProfilePopup () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
@@ -105,7 +105,7 @@ initialCards.forEach(function (place) {
 });
 
 /* Добавление новых карточек */
-function addCardSubmitHandler (evt) {
+function handleAddCard (evt) {
   evt.preventDefault();
   
   placesItemContainer.prepend(createCard(srcCardInput.value, nameCardInput.value));
@@ -151,7 +151,7 @@ function bindOpenCardImgListener(placesItemElement) {
 /* Слушатель на кнопку редактирования профиля */
 editProfileBtn.addEventListener('click', function() {
   openPopup(popupEditProfile);
-  editProfileContent();  
+  openEditProfilePopup();  
 });
 
 /* Слушатель на кнопку добавления карточки */
@@ -164,5 +164,5 @@ closePopupImgBtn.addEventListener('click', () => closePopup(popupImg));
 
 /* Слушатель на клик по оверлею */
 popupOverlays.forEach((popupOverlay) => {
-  popupOverlay.addEventListener('click', handlerOverlay);
+  popupOverlay.addEventListener('click', handlePopupOverlayClick);
 });

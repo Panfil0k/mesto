@@ -27,11 +27,11 @@ const isValidInput = (formElement, inputElement, { inputErrorClass, errorClass, 
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, { inputErrorClass, errorClass, ...rest });
     popupEditProfile.removeEventListener('submit', handleEditProfile);
-    popupAddCard.removeEventListener('submit', addCardSubmitHandler);
+    popupAddCard.removeEventListener('submit', handleAddCard);
   } else {
     hideInputError(formElement, inputElement, { inputErrorClass, errorClass, ...rest });
     popupEditProfile.addEventListener('submit', handleEditProfile);
-    popupAddCard.addEventListener('submit', addCardSubmitHandler);
+    popupAddCard.addEventListener('submit', handleAddCard);
   }
 };
 
