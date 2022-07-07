@@ -28,40 +28,29 @@ const popupTitle = popupImg.querySelector('.popup-img__title');
 /* Открытие\закрытие попапов */
 function openPopup (popup) {
   popup.classList.add('popup_open');
-  popup.addEventListener('click', handlerOverlay);
   document.addEventListener('keydown', handlerEsc);
 }
 
-editProfileBtn.addEventListener('click', function() {
-  openPopup(popupEditProfile);
-
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-
-  const eventInput = new Event('input'); // Принудительное событие input для редактирования профиля
-  const editProfileInputs = popupEditProfile.querySelectorAll('.edit-form__item');
-  editProfileInputs.forEach(input => input.dispatchEvent(eventInput));
-});
-
-addCardBtn.addEventListener('click', () => openPopup(popupAddCard));
-
 function closePopup (popup) {
   popup.classList.remove('popup_open');
-  if (popup.querySelector('.edit-form')) {
-    popup.querySelector('.edit-form').reset();
+  const formInPopup = popup.querySelector('.edit-form');
+  if (formInPopup) {
+    formInPopup.reset();
   }
-  popup.removeEventListener('click', handlerOverlay);
   document.removeEventListener('keydown', handlerEsc);
-  const errorListInput = Array.from(popup.querySelectorAll('.edit-form__item_type_error'));
+  
+  const {inputErrorClass, errorClass} = configValidation;
+  const errorListInput = Array.from(popup.querySelectorAll(`.${inputErrorClass}`));
   errorListInput.forEach((errorItem) => {
-    errorItem.classList.remove('edit-form__item_type_error');
+    errorItem.classList.remove(inputErrorClass);
   });
-  const errorListSpan = Array.from(popup.querySelectorAll('.edit-form__input-error_active'));
+  const errorListSpan = Array.from(popup.querySelectorAll(`.${errorClass}`));
   errorListSpan.forEach((errorItem) => {
-    errorItem.classList.remove('edit-form__input-error_active');
+    errorItem.classList.remove(errorClass);
   });
 }
 
+/* Закрытие попапа по клику на оверлей */
 function handlerOverlay(evt) {
   if(evt.target === evt.currentTarget) {
     const popupOpen = document.querySelector('.popup_open');
@@ -69,6 +58,7 @@ function handlerOverlay(evt) {
   }
 }
 
+/* Закрытие попапа по кнопке Esc */
 function handlerEsc(evt) {
   if (evt.key === 'Escape') {
     const popupOpen = document.querySelector('.popup_open');
@@ -76,12 +66,18 @@ function handlerEsc(evt) {
   }
 }
 
-closePopupEditProfileBtn.addEventListener('click', () => closePopup(popupEditProfile));
-closePopupAddCardBtn.addEventListener('click', () => closePopup(popupAddCard));
-closePopupImgBtn.addEventListener('click', () => closePopup(popupImg));
+/* Передаем в форму редактирования профиля текущие данные и вешаем событие input */
+function editProfileContent () {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+
+  const eventInput = new Event('input');
+  const editProfileInputs = popupEditProfile.querySelectorAll('.edit-form__item');
+  editProfileInputs.forEach(input => input.dispatchEvent(eventInput));
+}
 
 /* Функция редактирования профиля */
-function editProfileSubmitHandler (evt) {
+function handleEditProfile (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -96,9 +92,9 @@ function createCard(src, title) {
   placesItemElement.querySelector('.places__foto').alt = title;
   placesItemElement.querySelector('.places__name').textContent = title;
   
-  likeEventListener(placesItemElement);
-  openPopupImgListener(placesItemElement);
-  deleteEventListener(placesItemElement);
+  bindLikeCardListener(placesItemElement);
+  bindOpenCardImgListener(placesItemElement);
+  bindDeleteCardListener(placesItemElement);
   
   return placesItemElement
 }
@@ -118,27 +114,24 @@ function addCardSubmitHandler (evt) {
 }
 
 /* Лайк карточки */
-function handleLike (evt) {
-  evt.target.classList.toggle('places__like_active');
-}
-
-function likeEventListener(placesItemElement) {
-  const likeBtn = placesItemElement.querySelector('.places__like');
-  likeBtn.addEventListener('click', handleLike);
+function bindLikeCardListener(placesItemElement) {
+  const likeButton = placesItemElement.querySelector('.places__like');
+  likeButton.addEventListener('click', () => {
+    likeButton.classList.toggle('places__like_active');
+  });
 }
 
 /* Удаление карточки */
-function handleDelete (evt) {
-  evt.target.closest('.places__item').remove();
-}
-
-function deleteEventListener(placesItemElement) {
-  const deleteBtn = placesItemElement.querySelector('.places__delete');
-  deleteBtn.addEventListener('click', handleDelete);
+function bindDeleteCardListener(placesItemElement) {
+  const deleteButton = placesItemElement.querySelector('.places__delete');
+  const card = placesItemElement.querySelector('.places__item');
+  deleteButton.addEventListener('click', () => {
+    card.remove();
+  });
 }
 
 /* Открытие попапа с фото */
-function openPopupImgListener(placesItemElement) {
+function bindOpenCardImgListener(placesItemElement) {
   const thisImg = placesItemElement.querySelector('.places__foto');
   const thisTitle = placesItemElement.querySelector('.places__name').textContent;
 
@@ -152,5 +145,24 @@ function openPopupImgListener(placesItemElement) {
     
   }
 
-  thisImg.addEventListener('click', () => openPopupImg(placesItemElement));
+  thisImg.addEventListener('click', openPopupImg);
 }
+
+/* Слушатель на кнопку редактирования профиля */
+editProfileBtn.addEventListener('click', function() {
+  openPopup(popupEditProfile);
+  editProfileContent();  
+});
+
+/* Слушатель на кнопку добавления карточки */
+addCardBtn.addEventListener('click', () => openPopup(popupAddCard));
+
+/* Слушатели на кнопки закрытия попапов */
+closePopupEditProfileBtn.addEventListener('click', () => closePopup(popupEditProfile));
+closePopupAddCardBtn.addEventListener('click', () => closePopup(popupAddCard));
+closePopupImgBtn.addEventListener('click', () => closePopup(popupImg));
+
+/* Слушатель на клик по оверлею */
+popupOverlays.forEach((popupOverlay) => {
+  popupOverlay.addEventListener('click', handlerOverlay);
+});

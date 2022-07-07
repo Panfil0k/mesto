@@ -22,20 +22,20 @@ const hideInputError = (formElement, inputElement, { inputErrorClass, errorClass
   errorElement.textContent = '';
 }; 
 
-/* Проверка всей формы на валидность */
-const isValidForm = (formElement, inputElement, { inputErrorClass, errorClass, ...rest }) => {
+/* Проверка инпута на валидность */
+const isValidInput = (formElement, inputElement, { inputErrorClass, errorClass, ...rest }) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, { inputErrorClass, errorClass, ...rest });
-    popupEditProfile.removeEventListener('submit', editProfileSubmitHandler);
+    popupEditProfile.removeEventListener('submit', handleEditProfile);
     popupAddCard.removeEventListener('submit', addCardSubmitHandler);
   } else {
     hideInputError(formElement, inputElement, { inputErrorClass, errorClass, ...rest });
-    popupEditProfile.addEventListener('submit', editProfileSubmitHandler);
+    popupEditProfile.addEventListener('submit', handleEditProfile);
     popupAddCard.addEventListener('submit', addCardSubmitHandler);
   }
 };
 
-/* Проверка инпутов на валидность */
+/* Проверка всех инпутов на валидность */
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -60,7 +60,7 @@ const setEventListeners = (formElement, { inputSelector, submitButtonSelector, .
   
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValidForm(formElement, inputElement, rest);
+      isValidInput(formElement, inputElement, rest);
       toggleButtonState(inputList, buttonElement);
     });
   });
