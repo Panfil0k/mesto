@@ -1,14 +1,15 @@
 import {openPopup, popupImg, popupFoto, popupTitle} from './index.js';
 
 export class Card {
-  constructor(data) {
+  constructor(data, template) {
     this._link = data.link;
     this._name = data.name;
+    this._template = template;
   }
 
   _getTemplate() {
     const cardElement = document
-    .querySelector('#places-item-template')
+    .querySelector(this._template)
     .content
     .querySelector('.places__item')
     .cloneNode(true);
@@ -20,8 +21,9 @@ export class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.places__foto').src = this._link;
-    this._element.querySelector('.places__foto').alt = this._name;
+    const placesFoto = this._element.querySelector('.places__foto');
+    placesFoto.src = this._link;
+    placesFoto.alt = this._name;
     this._element.querySelector('.places__name').textContent = this._name;
 
     return this._element;
@@ -50,10 +52,10 @@ export class Card {
   }
 
   _handleOpenPopupImg() {
-    openPopup(popupImg);
-
     popupFoto.src = this._link;
     popupFoto.alt = this._name;
     popupTitle.textContent = this._name;
+
+    openPopup(popupImg);
   }
 }
