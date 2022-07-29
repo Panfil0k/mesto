@@ -49,8 +49,8 @@ function closePopup (popup) {
   const formInPopup = popup.querySelector('.edit-form');
   if (formInPopup) {
     formInPopup.reset();
-    profileFormClass.resetValidationForm();
-    cardFormClass.resetValidationForm();
+    profileFormValidator.resetValidationForm();
+    formAddCardValidator.resetValidationForm();
   }
   document.removeEventListener('keydown', handleEscKeyPress);
 }
@@ -105,16 +105,16 @@ function handleAddCard (evt) {
   const cardElement = card.generateCard();
   placesItemContainer.prepend(cardElement);
   
-  cardFormClass.disableButton();
+  formAddCardValidator.disableButton();
   closePopup(popupAddCard);
 }
 
 /* Добавляем валидацию форм */
-const profileFormClass = new FormValidator(profileForm, validationConfig);
-const cardFormClass = new FormValidator(cardForm, validationConfig);
+const profileFormValidator = new FormValidator(profileForm, validationConfig);
+const formAddCardValidator = new FormValidator(cardForm, validationConfig);
  
-profileFormClass.enableValidation();
-cardFormClass.enableValidation();
+profileFormValidator.enableValidation();
+formAddCardValidator.enableValidation();
 
 /* Слушатели отправки форм */
 popupEditProfile.addEventListener('submit', handleEditProfile);
