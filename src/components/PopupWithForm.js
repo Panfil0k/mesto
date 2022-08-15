@@ -1,14 +1,14 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit, handleResetValidation }) {
-    super({ popupSelector });
+  constructor({ popupElement, handleFormSubmit, resetValidation }) {
+    super({ popupElement });
     this._handleFormSubmit  = handleFormSubmit;
-    this._handleResetValidation = handleResetValidation;
+    this._resetValidation = resetValidation;
+    this._inputList = this._popupElement.querySelectorAll('.edit-form__item');
   }
 
   _getInputValues() {
-    this._inputList = this._popupSelector.querySelectorAll('.edit-form__item');
     this._formValues = {};
     this._inputList.forEach(input => {
       this._formValues[input.name] = input.value;
@@ -17,15 +17,14 @@ export default class PopupWithForm extends Popup {
     return this._formValues;
   }
 
-  setInputValues(data) {
-    this._form = this._popupSelector.querySelector('.edit-form');
-    this._form.name.value = data.profileName;
-    this._form.job.value = data.profileJob;
+  setInputValues(data, firstValue, secondValue) {
+    firstValue.value = data.profileName;
+    secondValue.value = data.profileJob;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupSelector.addEventListener('submit', (evt) => {
+    this._popupElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
     });
@@ -33,7 +32,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._popupSelector.querySelector('.edit-form').reset();
-    this._handleResetValidation();
+    this._popupElement.querySelector('.edit-form').reset();
+    this._resetValidation();
   }
 }

@@ -5,6 +5,8 @@ export default class FormValidator {
     this._submitButtonSelector = validationConfig.submitButtonSelector;
     this._inputErrorClass = validationConfig.inputErrorClass;
     this._errorClass = validationConfig.errorClass;
+    this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
 
   enableValidation() {  
@@ -48,15 +50,15 @@ export default class FormValidator {
   /* Меняем состояние кнопки в зависимости от валидности инпутов */
   _toggleButtonState(inputList) {
     if (this._hasInvalidInput(inputList)) {
-      this._formElement.querySelector(this._submitButtonSelector).disabled = true;
+      this._submitButton.disabled = true;
     } else {
-      this._formElement.querySelector(this._submitButtonSelector).disabled = false;
+      this._submitButton.disabled = false;
     }
   }
 
   /* Сброс активной кнопки сабмита */
   disableButton() {
-    this._formElement.querySelector(this._submitButtonSelector).disabled = true;
+    this._submitButton.disabled = true;
   }
 
   /* Показываем ошибку валидации */
@@ -77,9 +79,7 @@ export default class FormValidator {
 
   /* Сброс ошибок валидации при закрытии попапа без сабмита*/
   resetValidationForm() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
   }

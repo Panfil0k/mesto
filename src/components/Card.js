@@ -2,6 +2,7 @@ export default class Card {
   constructor(data, template, handleCardClick) {
     this._link = data.link;
     this._name = data.name;
+    this._dataCard = { link: this._link, name: this._name };
     this._template = template;
     this._handleCardClick = handleCardClick;
   }
@@ -20,9 +21,9 @@ export default class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    const placesFoto = this._element.querySelector('.places__foto');
-    placesFoto.src = this._link;
-    placesFoto.alt = this._name;
+    this._elementPhoto = this._element.querySelector('.places__foto');
+    this._elementPhoto.src = this._link;
+    this._elementPhoto.alt = this._name;
     this._element.querySelector('.places__name').textContent = this._name;
 
     return this._element;
@@ -38,7 +39,7 @@ export default class Card {
     });
 
     this._element.querySelector('.places__foto').addEventListener('click', () => {
-      this._handleCardClick(this._link, this._name);
+      this._handleCardClick(this._dataCard);
     });
   }
 
@@ -48,5 +49,6 @@ export default class Card {
 
   _handleDeleteCard() {
     this._element.remove();
+    this._element = null;
   }
 }

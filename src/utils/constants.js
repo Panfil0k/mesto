@@ -30,3 +30,5 @@ export const editProfileBtn = document.querySelector('.profile__edit-btn');
 export const addCardBtn = document.querySelector('.profile__add-btn');
 export const profileForm = document.querySelector('.edit-form-profile');
 export const cardForm = document.querySelector('.edit-form-card');
+export const profileNameInput = profileForm.querySelector('.edit-form__item_el_name');
+export const profileJobInput = profileForm.querySelector('.edit-form__item_el_job');
