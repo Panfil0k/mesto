@@ -24,21 +24,18 @@ const validationConfig = {
 };
 
 /* Функция создания карточки */
-function createCard(data, newCard) {
+function createCard(data) {
   const card = new Card(data, '#places-item-template', handleCardClick);
   const cardElement = card.generateCard();
-  if(newCard === true) {
-    defaultCardList.addItemToBegin(cardElement);
-  } else {
-    defaultCardList.addItemToEnd(cardElement);
-  } 
+
+  return cardElement;
 }
 
 /* Добавление дефолтных карточек */
 const defaultCardList = new Section({ 
   items: initialCards,
   renderer: (item) => {
-    createCard(item, false);  
+    defaultCardList.addItemToEnd(createCard(item));
   }
 
 }, placesItemContainer);
@@ -50,7 +47,7 @@ const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJo
 
 /* Попап редактирования профиля */
 const popupEditProfile = new PopupWithForm({ 
-  popupElement: '.popup-edit-profile',
+  popupSelector: '.popup-edit-profile',
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
     popupEditProfile.close();
@@ -64,10 +61,10 @@ popupEditProfile.setEventListeners();
 
 /* Попап добавления карточки */
 const popupAddCard = new PopupWithForm({ 
-  popupElement: '.popup-add-card',
+  popupSelector: '.popup-add-card',
   handleFormSubmit: (formData) => {
     const data = { link: formData.cardSrc, name: formData.cardName };
-    createCard(data, true);
+    defaultCardList.addItemToBegin(createCard(data));
     formAddCardValidator.disableButton();
     popupAddCard.close();
   },
@@ -79,7 +76,7 @@ const popupAddCard = new PopupWithForm({
 popupAddCard.setEventListeners();
 
 /* Попап с картинкой */
-const popupWithImg = new PopupWithImage({ popupElement: '.popup-img' });
+const popupWithImg = new PopupWithImage({ popupSelector: '.popup-img' });
 
 popupWithImg.setEventListeners();
 
@@ -97,7 +94,8 @@ formAddCardValidator.enableValidation();
 
 /* Слушатель на кнопку редактирования профиля */
 editProfileBtn.addEventListener('click', function() {
-  popupEditProfile.setInputValues(userInfo.getUserInfo(), profileNameInput, profileJobInput);
+  const data = { name: userInfo.getUserInfo().profileName, job: userInfo.getUserInfo().profileJob }
+  popupEditProfile.setInputValues(data);
   popupEditProfile.open();
 });
 
