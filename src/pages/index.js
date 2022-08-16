@@ -5,9 +5,7 @@ import {
   editProfileBtn,
   addCardBtn,
   profileForm,
-  cardForm,
-  profileNameInput,
-  profileJobInput
+  cardForm
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -94,8 +92,7 @@ formAddCardValidator.enableValidation();
 
 /* Слушатель на кнопку редактирования профиля */
 editProfileBtn.addEventListener('click', function() {
-  const data = { name: userInfo.getUserInfo().profileName, job: userInfo.getUserInfo().profileJob }
-  popupEditProfile.setInputValues(data);
+  popupEditProfile.setInputValues(userInfo.getUserInfo());
   popupEditProfile.open();
 });
 

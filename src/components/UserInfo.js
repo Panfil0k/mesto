@@ -6,8 +6,8 @@ export default class UserInfo {
 
   getUserInfo() {
     this._profileData = {
-      profileName: this._profileName.textContent,
-      profileJob: this._profileJob.textContent
+      name: this._profileName.textContent,
+      job: this._profileJob.textContent
     };    
     return this._profileData
   }
