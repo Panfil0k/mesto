@@ -27,9 +27,6 @@ const validationConfig = {
 /* Подключаем API */
 const api = new Api('https://mesto.nomoreparties.co');
 
-/* Класс добавления карточек 
-const defaultCardList = new Section(placesItemContainer); */
-
 /* Класс отображения информации о пользователе */
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job', profileAvatarSelector: '.profile__avatar' });
 
