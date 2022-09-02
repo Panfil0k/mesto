@@ -3,6 +3,13 @@ export default class Api {
     this._baseUrl = baseUrl;
   }
 
+  _returnRes(res) { 
+    if(res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res.status);
+  }
+
   _getUserInfo() {
     return fetch(`${this._baseUrl}/v1/cohort-49/users/me`, {
       headers: {
@@ -10,12 +17,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 
   _getCards() {
@@ -25,12 +27,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 
   getCardsAndUserInfo() {
@@ -52,12 +49,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 
   setUserAvatar(dataUser) {
@@ -71,12 +63,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 
   generateCard(data) {
@@ -91,12 +78,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 
   deleteCard(cardId) {
@@ -107,12 +89,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 
   setLikeCard(cardId) {
@@ -123,12 +100,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 
   deleteLikeCard(cardId) {
@@ -139,12 +111,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
+    .then(this._returnRes)
   }
 }
 

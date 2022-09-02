@@ -27,8 +27,8 @@ const validationConfig = {
 /* Подключаем API */
 const api = new Api('https://mesto.nomoreparties.co');
 
-/* Класс добавления карточек */
-const defaultCardList = new Section(placesItemContainer);
+/* Класс добавления карточек 
+const defaultCardList = new Section(placesItemContainer); */
 
 /* Класс отображения информации о пользователе */
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job', profileAvatarSelector: '.profile__avatar' });
@@ -71,9 +71,14 @@ api.getCardsAndUserInfo()
     userInfo.setUserInfo(data[0]);
     userInfo.setUserAvatar(data[0]);
 
-    data[1].forEach(item => {
-      defaultCardList.addItemToEnd(createCard(item, data[0]._id));
-    });
+    const defaultCardList = new Section({ 
+      items: data[1],
+      renderer: (item) => {
+        defaultCardList.addItemToEnd(createCard(item, data[0]._id));
+      }
+    }, placesItemContainer);
+
+    defaultCardList.renderItems();
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
@@ -86,14 +91,16 @@ const popupAddCard = new PopupWithForm({
     popupAddCard.renderLoading(true);
     api.generateCard(formData)
       .then((res) => {
+        const defaultCardList = new Section({ }, placesItemContainer);
         defaultCardList.addItemToBegin(createCard(res, res.owner._id));
+
+        formAddCardValidator.disableButton();
+        popupAddCard.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => popupAddCard.renderLoading(false, 'Создать'))
-    formAddCardValidator.disableButton();
-    popupAddCard.close();
   },
   resetValidation: () => {
     formAddCardValidator.resetValidationForm();
@@ -110,13 +117,12 @@ const popupEditProfile = new PopupWithForm({
     api.setUserInfo(formData)
       .then((res) => {
         userInfo.setUserInfo(res);
+        popupEditProfile.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => popupEditProfile.renderLoading(false, 'Сохранить'))
-
-    popupEditProfile.close();
   },
   resetValidation: () => {
     profileFormValidator.resetValidationForm();
@@ -133,14 +139,13 @@ const popupEditAvatar = new PopupWithForm({
     api.setUserAvatar(avatarUrl)
       .then((res) => {
         userInfo.setUserAvatar(res);
+        avatarFormValidator.disableButton();
+        popupEditAvatar.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => popupEditAvatar.renderLoading(false, 'Сохранить'))
-    
-    avatarFormValidator.disableButton();
-    popupEditAvatar.close();
   },
   resetValidation: () => {
     avatarFormValidator.resetValidationForm();
@@ -160,24 +165,25 @@ function handleCardClick(dataCard) {
 }
 
 /* Попап с уточнением об удалении */
-const PopupWithConfirmDelete = new PopupWithConfirmation({ 
+const popupWithConfirmDelete = new PopupWithConfirmation({ 
   popupSelector: '.popup-confirm',
-  handleFormSubmit: (thisCard, cardId) => {
+  handleFormSubmit: (card, cardId) => {
     api.deleteCard(cardId)
+      .then((res) => {
+        card.remove();
+        card = null;
+        popupWithConfirmDelete.close();
+      })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
-
-    thisCard.remove();
-    thisCard = null;
-    PopupWithConfirmDelete.close();
   }
 });
 
 /* Коллбэк функция для удаления карточки */
 function confirmPopup(thisCard, cardId) {
-  PopupWithConfirmDelete.open();
-  PopupWithConfirmDelete.setEventListeners(thisCard, cardId);
+  popupWithConfirmDelete.open();
+  popupWithConfirmDelete.setEventListeners(thisCard, cardId);
 }
 
 /* Добавляем валидацию форм */

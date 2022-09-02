@@ -10,7 +10,7 @@ export default class Card {
     this._template = template;
     this._handleCardClick = handleCardClick;
     this._confirmPopup = confirmPopup;
-    this._handleLikeCard = handleLikeCard;
+    this._handleLikeCard = handleLikeCard;;
   }
 
   _getTemplate() {
