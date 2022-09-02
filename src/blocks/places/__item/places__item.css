@@ -6,7 +6,8 @@
   grid-template-columns: auto 42px;
   grid-template-areas:
     'foto foto'
-    'name like';
+    'name like'
+    'name counter';
   align-items: center;
   position: relative;
 }

@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit  = handleFormSubmit;
     this._resetValidation = resetValidation;
     this._inputList = this._popupElement.querySelectorAll('.edit-form__item');
+    this._submitButton = this._popupElement.querySelector('.submit-btn');
   }
 
   _getInputValues() {
@@ -36,4 +37,13 @@ export default class PopupWithForm extends Popup {
     this._popupElement.querySelector('.edit-form').reset();
     this._resetValidation();
   }
+
+  /* Функция отображения ожидания ответа сервера  */
+  renderLoading(isLoading, textButton) {
+    if(isLoading) {
+      this._submitButton.textContent = 'Сохранение...';
+    } else {
+      this._submitButton.textContent = textButton;
+  }
+}
 }
