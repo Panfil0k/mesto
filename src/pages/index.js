@@ -82,15 +82,15 @@ api.getCardsAndUserInfo()
   })
 
 /* Попап добавления карточки */
+const cardList = new Section({ }, placesItemContainer);
+
 const popupAddCard = new PopupWithForm({ 
   popupSelector: '.popup-add-card',
   handleFormSubmit: (formData) => {
     popupAddCard.renderLoading(true);
     api.generateCard(formData)
       .then((res) => {
-        const defaultCardList = new Section({ }, placesItemContainer);
-        defaultCardList.addItemToBegin(createCard(res, res.owner._id));
-
+        cardList.addItemToBegin(createCard(res, res.owner._id));
         formAddCardValidator.disableButton();
         popupAddCard.close();
       })
